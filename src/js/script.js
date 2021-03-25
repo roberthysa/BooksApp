@@ -97,7 +97,11 @@
 
           } else {
 
-            thisBooksList.filters.splice(thisBooksList.filters.indexOf('clickedElement.value'));
+            const index = thisBooksList.filters.indexOf(clickedElement.value);
+            if (index >= 0) {
+              thisBooksList.filters.splice(index, 1);
+            }
+
           }
         }
         thisBooksList.filterBooks();
