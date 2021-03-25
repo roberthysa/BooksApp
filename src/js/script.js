@@ -34,6 +34,7 @@
       thisBooksList.getElements ();
       thisBooksList.render();
       thisBooksList.determineRatingBgc();
+      thisBooksList.determineRatingWidth();
       thisBooksList.initActions();
     }
 
@@ -56,6 +57,7 @@
       for (let book of dataSource.books) {
         const rating = book.rating;
         book.ratingBgc = thisBooksList.determineRatingBgc(rating);
+        book.ratingWidth = thisBooksList.determineRatingWidth(rating);
 
         const generatedHTML = templates.bookTemplate(book);
         const element = utils.createDOMFromHTML(generatedHTML);
@@ -161,6 +163,11 @@
 
     }
 
+    determineRatingWidth(rating) {
+      const width = rating*10;
+
+      return width;
+    }
 
   }
 
