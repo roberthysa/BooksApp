@@ -33,6 +33,7 @@
 
       thisBooksList.getElements ();
       thisBooksList.render();
+      thisBooksList.determineRatingBgc();
       thisBooksList.initActions();
     }
 
@@ -53,6 +54,9 @@
       const thisBooksList = this;
 
       for (let book of dataSource.books) {
+        const rating = book.rating;
+        book.ratingBgc = thisBooksList.determineRatingBgc(rating);
+
         const generatedHTML = templates.bookTemplate(book);
         const element = utils.createDOMFromHTML(generatedHTML);
         thisBooksList.bookContainer.appendChild(element);
@@ -133,6 +137,30 @@
         }
       }
     }
+
+    determineRatingBgc(rating){
+      const thisBooksList = this;
+
+      if(rating<6){
+        thisBooksList.background  = 'linear-gradient(to bottom,  #fefcea 0%, #f1da36 100%);';
+      }
+
+      if(rating >6 && rating<=8){
+        thisBooksList.background  = 'linear-gradient(to bottom, #b4df5b 0%,#b4df5b 100%);';
+      }
+
+      if(rating>8 && rating<=9){
+        thisBooksList.background  = 'linear-gradient(to bottom, #299a0b 0%, #299a0b 100%);';
+      }
+
+      if(rating>9){
+        thisBooksList.background  = 'linear-gradient(to bottom, #ff0084 0%,#ff0084 100%);';
+      }
+
+      return thisBooksList.background ;
+
+    }
+
 
   }
 
