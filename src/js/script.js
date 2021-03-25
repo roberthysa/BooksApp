@@ -34,7 +34,6 @@
       thisBooksList.getElements ();
       thisBooksList.render();
       thisBooksList.determineRatingBgc();
-      thisBooksList.determineRatingWidth();
       thisBooksList.initActions();
     }
 
@@ -57,7 +56,7 @@
       for (let book of dataSource.books) {
         const rating = book.rating;
         book.ratingBgc = thisBooksList.determineRatingBgc(rating);
-        book.ratingWidth = thisBooksList.determineRatingWidth(rating);
+        book.ratingWidth = rating * 10;
 
         const generatedHTML = templates.bookTemplate(book);
         const element = utils.createDOMFromHTML(generatedHTML);
@@ -141,45 +140,30 @@
     }
 
     determineRatingBgc(rating){
-      const thisBooksList = this;
+      let color1 = '';
+      let color2 = '';
 
-      if(rating<6){
-        thisBooksList.background  = 'linear-gradient(to bottom,  #fefcea 0%, #f1da36 100%);';
+      if (rating < 6) {
+        color1 = '#fefcea';
+        color2 = '#f1da36';
+      } else if (rating <= 8) {
+        color1 = '#b4df5b';
+        color2 = color1;
+      } else if (rating <= 9) {
+        color1 = '#299a0b';
+        color2 = color1;
+      } else {
+        color1 = '#ff0084';
+        color2 = color1;
       }
-
-      if(rating >6 && rating<=8){
-        thisBooksList.background  = 'linear-gradient(to bottom, #b4df5b 0%,#b4df5b 100%);';
-      }
-
-      if(rating>8 && rating<=9){
-        thisBooksList.background  = 'linear-gradient(to bottom, #299a0b 0%, #299a0b 100%);';
-      }
-
-      if(rating>9){
-        thisBooksList.background  = 'linear-gradient(to bottom, #ff0084 0%,#ff0084 100%);';
-      }
-
-      return thisBooksList.background ;
-
-    }
-
-    determineRatingWidth(rating) {
-      const width = rating*10;
-
-      return width;
+      //const background = 'linear-gradient(to bottom,${color1} 0%,${color2} 100%)';
+      const background = 'linear-gradient(to bottom,' + color1 + ' 0%,' + color2 + ' 100%)';
+      console.log('background:', background);
+      return background;
     }
 
   }
 
-  const app = {
-    init: function () {
-      //const thisApp = this;
+  const app = new BooksList();
 
-      //console.log('thisApp:', thisApp);
-
-      new BooksList();
-    },
-  };
-
-  app.init();
 }
