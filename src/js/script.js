@@ -1,4 +1,5 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
+
 {
 
   'use strict';
@@ -156,7 +157,7 @@
         color1 = '#ff0084';
         color2 = color1;
       }
-      //const background = 'linear-gradient(to bottom,${color1} 0%,${color2} 100%)';
+      //const background = `linear-gradient(to bottom,${color1} 0%,${color2} 100%)`;
       const background = 'linear-gradient(to bottom,' + color1 + ' 0%,' + color2 + ' 100%)';
       console.log('background:', background);
       return background;
